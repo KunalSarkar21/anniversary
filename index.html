@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>8 Years | Kushika❤️</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        body { margin: 0; background-color: #050208; color: white; font-family: 'Inter', sans-serif; }
+        #canvas-container { position: fixed; top: 0; left: 0; z-index: -1; width: 100%; height: 100vh; }
+        .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.1); }
+        .cursive { font-family: 'Dancing Script', cursive; }
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 1s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+    </style>
+</head>
+<body>
+
+    <div id="canvas-container"></div>
+
+    <section class="h-screen flex flex-col items-center justify-center px-6 text-center">
+        <h1 class="text-6xl md:text-8xl font-bold text-red-300 mb-2 drop-shadow-lg">Kunal & Ishika</h1>
+        <p class="text-lg tracking-widest uppercase italic text-blue-400 mb-12">Chapter 8: The Infinity Year</p>
+        
+        <div class="glass p-8 rounded-3xl max-w-2xl w-full shadow-2xl">
+            <div id="timer" class="grid grid-cols-4 gap-4 text-white">
+                <div class="flex flex-col"><span id="days" class="text-3xl md:text-5xl font-bold text-pink-500">0</span><span class="text-[10px] uppercase">Days</span></div>
+                <div class="flex flex-col"><span id="hours" class="text-3xl md:text-5xl font-bold text-pink-500">0</span><span class="text-[10px] uppercase">Hrs</span></div>
+                <div class="flex flex-col"><span id="minutes" class="text-3xl md:text-5xl font-bold text-pink-500">0</span><span class="text-[10px] uppercase">Min</span></div>
+                <div class="flex flex-col"><span id="seconds" class="text-3xl md:text-5xl font-bold text-pink-500">0</span><span class="text-[10px] uppercase">Sec</span></div>
+            </div>
+        </div>
+
+        <div class="mt-20 animate-bounce text-blue-400">
+            <p class="text-sm uppercase tracking-widest">Scroll for the surprise</p>
+            <span class="text-2xl">↓</span>
+        </div>
+    </section>
+
+    <section class="min-h-screen py-20 px-6 max-w-6xl mx-auto">
+        <h2 class="reveal cursive text-5xl text-center text-pink-200 mb-16">8 Years of Memories</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="reveal glass p-4 rounded-2xl transform hover:scale-105 transition-transform">
+                <div class="h-64 bg-gray-800 rounded-xl mb-4 overflow-hidden">
+                    <img src="img.jpeg" alt="Memory 1" class="w-full h-full object-cover">
+                </div>
+                <p class="cursive text-xl text-pink-300">Pookie us</p>
+            </div>
+
+            <div class="reveal glass p-4 rounded-2xl transform hover:scale-105 transition-transform" style="transition-delay: 200ms;">
+                <div class="h-64 bg-gray-800 rounded-xl mb-4 overflow-hidden">
+                    <img src="img2.jpeg" alt="Memory 2" class="w-full h-full object-cover">
+                </div>
+                <p class="cursive text-xl text-pink-300">That messy pic we loved</p>
+            </div>
+
+            <div class="reveal glass p-4 rounded-2xl transform hover:scale-105 transition-transform" style="transition-delay: 400ms;">
+                <div class="h-64 bg-gray-800 rounded-xl mb-4 overflow-hidden">
+                    <img src="img3.jpeg" alt="Memory 3" class="w-full h-full object-cover">
+                </div>
+                <p class="cursive text-xl text-pink-300">8 years later, still you.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="h-screen flex items-center justify-center px-6">
+        <div class="reveal glass p-12 rounded-full text-center max-w-3xl border-pink-500/30">
+            <h3 class="cursive text-4xl text-pink-300 mb-6">To Ishika,</h3>
+            <p class="text-lg leading-relaxed text-gray-200">
+                To the woman who holds my heart and makes my world bright,
+                You are my favorite person, my joy, and my light.
+                Thank you for the laughter and the love that you give,
+                You’re the reason I have such a beautiful life to live.
+                Happy anniversary, my beautiful Jaan❤️.
+            </p>
+            <p class="mt-8 cursive text-2xl text-pink-400">— Kunal</p>
+        </div>
+    </section>
+
+    <script>
+        // --- SCROLL REVEAL LOGIC ---
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // --- ANNIVERSARY TIMER ---
+        const startDate = new Date("2018-03-15T00:00:00");
+        function updateCounter() {
+            const now = new Date();
+            const diff = now - startDate;
+            document.getElementById('days').innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
+            document.getElementById('hours').innerText = Math.floor((diff / (1000 * 60 * 60)) % 24);
+            document.getElementById('minutes').innerText = Math.floor((diff / 1000 / 60) % 60);
+            document.getElementById('seconds').innerText = Math.floor((diff / 1000) % 60);
+        }
+        setInterval(updateCounter, 1000);
+        updateCounter();
+
+        // --- THREE.JS HEART ---
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.getElementById('canvas-container').appendChild(renderer.domElement);
+
+        const geometry = new THREE.BufferGeometry();
+        const vertices = [];
+        for (let i = 0; i < 4000; i++) {
+            const t = Math.random() * Math.PI * 2;
+            const x = 16 * Math.pow(Math.sin(t), 3);
+            const y = 13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t);
+            vertices.push(x * 0.5, y * 0.5, (Math.random() - 0.5) * 5);
+        }
+        geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
+        const heartPoints = new THREE.Points(geometry, new THREE.PointsMaterial({ color: 0xff69b4, size: 0.1 }));
+        scene.add(heartPoints);
+        camera.position.z = 20;
+
+        function animate() {
+            requestAnimationFrame(animate);
+            heartPoints.rotation.y += 0.003;
+            renderer.render(scene, camera);
+        }
+        animate();
+
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+    </script>
+</body>
+</html>
